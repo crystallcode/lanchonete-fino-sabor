@@ -549,23 +549,48 @@
         </div>
         <p class="text-red-500 hidden" id="nameuser-warn">Digite o seu nome completo!</p>
 
-        <p class="font-bold mt-3">Endereço de entrega:</p>
-        <input
-            type="text"
-            placeholder="Digite o seu endereço..."
-            id="address"
-            class="w-full border-2 p-1 rounded my-1"
-        >
+        <!-- Opções de Retirada ou Delivery -->
+        <p class="font-bold mt-3">O pedido é para:</p>
+        <div id="delivery-selection" class="block gap-4 mb-4">
 
-        <p class="text-red-500 hidden" id="address-warn">Digite o seu endereço completo!</p>
+            <label class="flex items-center gap-2">
+                <input
+                    type="radio"
+                    name="delivery-method"
+                    value="delivery"
+                    id="delivery"
+                    class="form-radio text-right"> Delivery
+            </label>
 
-        <p class="font-bold mt-3">Ponto de referência:</p>
-        <input
-            type="text"
-            placeholder="Digite o ponto de referência do local"
-            id="pontoref"
-            class="w-full border-2 p-1 rounded my-1"
-        >
+            <label class="flex items-center gap-2">
+                <input
+                    type="radio"
+                    name="delivery-method"
+                    value="pickup"
+                    id="pickup"
+                    class="form-radio text-right"> Retirar no local
+            </label>
+        </div>
+
+        <!-- Campos de Delivery -->
+        <div id="delivery-fields" class="hidden">
+            <p class="font-bold mt-3">Endereço de entrega:</p>
+            <input
+                type="text"
+                placeholder="Digite o seu endereço..."
+                id="address"
+                class="w-full border-2 p-1 rounded my-1"
+            >
+            <p class="text-red-500 hidden" id="address-warn">Digite o seu endereço completo!</p>
+
+            <p class="font-bold mt-3">Ponto de referência:</p>
+            <input
+                type="text"
+                placeholder="Digite o ponto de referência do seu local"
+                id="pontoref"
+                class="w-full border-2 p-1 rounded my-1"
+            >
+        </div>
 
         <p class="font-bold mt-3">Observações?</p>
         <input
@@ -595,7 +620,6 @@
                     class="w-full border-2 p-1 rounded my-1"
                     required
                 >
-            
                 <p class="text-red-500 hidden" id="troco-warn">Digite se precisará de troco e para quanto, caso precise</p>
             </div>
 
@@ -622,38 +646,53 @@
     </div>
     </div>
 
-    <!-- SCRIPT DE CONTROLE DE PAGAMENTO -->
+    <!-- SCRIPT DE CONTROLE DE PAGAMENTO E DELIVERY -->
     <script>
-        document.querySelectorAll('input[name="payment"]').forEach(input => {
-            input.addEventListener('change', function() {
-                const isCash = document.getElementById('payment-cash').checked;
-                const isPix = document.getElementById('payment-pix').checked;
+    // Controle de métodos de pagamento
+    document.querySelectorAll('input[name="payment"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const isCash = document.getElementById('payment-cash').checked;
+            const isPix = document.getElementById('payment-pix').checked;
 
-                if (isCash) {
-                    document.getElementById('change-selection').classList.remove('hidden');
-                    document.getElementById('pix-section').classList.add('hidden');
-                    document.getElementById('pix-proof').value = '';
-                    document.getElementById('pix-warn').classList.add('hidden');
-                } else if (isPix) {
-                    document.getElementById('change-selection').classList.add('hidden');
-                    document.getElementById('pix-section').classList.remove('hidden');
-                }
-            });
+            if (isCash) {
+                document.getElementById('change-selection').classList.remove('hidden');
+                document.getElementById('pix-section').classList.add('hidden');
+                document.getElementById('pix-warn').classList.add('hidden');
+            } else if (isPix) {
+                document.getElementById('change-selection').classList.add('hidden');
+                document.getElementById('pix-section').classList.remove('hidden');
+            }
         });
+    });
+
+    // Controle de método de entrega (Delivery ou Pickup)
+    document.querySelectorAll('input[name="delivery-method"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const isDelivery = document.getElementById('delivery').checked;
+
+            if (isDelivery) {
+                document.getElementById('delivery-fields').classList.remove('hidden');
+                document.getElementById('address-warn').classList.add('hidden');
+            } else {
+                document.getElementById('delivery-fields').classList.add('hidden');
+                document.getElementById('address-warn').classList.add('hidden');
+            }
+        });
+    });
     </script>
 
-        <!--BOTÃO FOOTER CARRINHO-->
-        <footer class="w-full bg-red-500 py-3 fixed bottom-0 z-40 flex items-center justify-center">
-            <button 
-            class="flex items-center gap-2 text-white font-bold"
-            id="cart-btn"
-            >
-                (<span id="cart-count">0</span>)
-                Veja seu carrinho
-                <i class="fa fa-cart-plus text-lg text-white"></i>
-            </button>
-        </footer>
-        <!--FIM FOOTER CARRINHO-->
+    <!--BOTÃO FOOTER CARRINHO-->
+    <footer class="w-full bg-red-500 py-3 fixed bottom-0 z-40 flex items-center justify-center">
+    <button 
+    class="flex items-center gap-2 text-white font-bold"
+    id="cart-btn"
+    >
+        (<span id="cart-count">0</span>)
+        Veja seu carrinho
+        <i class="fa fa-cart-plus text-lg text-white"></i>
+    </button>
+    </footer>
+    <!--FIM FOOTER CARRINHO-->
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="scrip.js"></script>
