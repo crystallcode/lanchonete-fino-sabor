@@ -233,7 +233,7 @@ Observações do cliente, caso tenha: '${observacoesInput.value}'
 function checkRestaurantOpen(){
     const data = new Date();
     const hora = data.getHours();
-    return hora >= 18;30 && hora < 23;01; // true
+    return hora >= 18 && hora < 23;01; // true
 }
 
 const spanItem = document.getElementById("date-span");
