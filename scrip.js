@@ -223,7 +223,7 @@ Forma de pagamento: ${paymentInfo}
 Observações do cliente, caso tenha: '${observacoesInput.value}'
     `);
 
-    const phone = "+5579996041990";
+    const phone = "+5579996051086";
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
     cart = [];
@@ -233,7 +233,7 @@ Observações do cliente, caso tenha: '${observacoesInput.value}'
 function checkRestaurantOpen(){
     const data = new Date();
     const hora = data.getHours();
-    return hora >= 18 && hora < 23;01; // true
+    return hora >= 13 && hora < 23;01; // true
 }
 
 const spanItem = document.getElementById("date-span");
