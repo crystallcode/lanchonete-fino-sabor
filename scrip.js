@@ -223,7 +223,7 @@ Forma de pagamento: ${paymentInfo}
 Observações do cliente, caso tenha: '${observacoesInput.value}'
     `);
 
-    const phone = "+5579996051086";
+    const phone = "+5579996041990";
     window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
     cart = [];
