@@ -230,10 +230,11 @@ Observações do cliente, caso tenha: '${observacoesInput.value}'
     updateCartModal();
 });
 
-function checkRestaurantOpen(){
+function checkRestaurantOpen() {
     const data = new Date();
     const hora = data.getHours();
-    return hora >= 10 && hora < 12; // true
+    const minutos = data.getMinutes();
+    return (hora > 18 || (hora === 18 && minutos >= 30)) && (hora < 23 || (hora === 23 && minutos === 0));
 }
 
 const spanItem = document.getElementById("date-span");
