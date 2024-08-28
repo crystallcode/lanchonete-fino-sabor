@@ -17,6 +17,42 @@ const trocoWarn = document.getElementById('troco-warn');
 const deliveryFields = document.getElementById('delivery-fields');
 const deliveryMethodRadios = document.querySelectorAll('input[name="delivery-method"]');
 const paymentMethodRadios = document.querySelectorAll('input[name="payment"]');
+const pagamentoWarn = document.getElementById('pagamento-warn');
+const retiradaWarn = document.getElementById('retirada-warn');
+const horarioFuncionamento = document.getElementById('horario-funcionamento');
+const item1Menu = document.getElementById('item-1');
+const item2Menu = document.getElementById('item-2');
+const item3Menu = document.getElementById('item-3');
+
+function hoverItem1() {
+    item2Menu.style.opacity = '0.7';
+    item3Menu.style.opacity = '0.7';
+}
+
+function outItem1() {
+    item2Menu.style.opacity = '1';
+    item3Menu.style.opacity = '1';
+}
+
+function hoverItem2() {
+    item1Menu.style.opacity = '0.7';
+    item3Menu.style.opacity = '0.7';
+}
+
+function outItem2() {
+    item1Menu.style.opacity = '1';
+    item3Menu.style.opacity = '1';
+}
+
+function hoverItem3() {
+    item2Menu.style.opacity = '0.7';
+    item1Menu.style.opacity = '0.7';
+}
+
+function outItem3() {
+    item2Menu.style.opacity = '1';
+    item1Menu.style.opacity = '1';
+}
 
 let cart = [];
 let paymentMethod = '';
@@ -136,6 +172,20 @@ cashamountInput.addEventListener("input", function(event){
     }
 });
 
+//Retirada warn
+deliveryMethodRadios.forEach(input => {
+    input.addEventListener('change', function() {
+        retiradaWarn.classList.add('hidden'); // Remove o aviso quando um método é selecionado
+    });
+});
+
+//Pagamento warn
+paymentMethodRadios.forEach(input => {
+    input.addEventListener('change', function() {
+        pagamentoWarn.classList.add('hidden'); 
+    });
+});
+
 // Controle de método de entrega (Delivery ou Pickup)
 deliveryMethodRadios.forEach(input => {
     input.addEventListener('change', function() {
@@ -187,9 +237,22 @@ checkoutBtn.addEventListener("click", function(){
         return;
     }
 
+    const deliveryMethodSelected = document.querySelector('input[name="delivery-method"]:checked');
+    if (!deliveryMethodSelected) {
+        retiradaWarn.classList.remove('hidden');
+        retiradaWarn.classList.add('border-red-500');
+        return;
+    }
+
     if(document.getElementById('delivery').checked && addressInput.value === ""){
         addressWarn.classList.remove("hidden");
         addressWarn.classList.add("border-red-500");
+        return;
+    }
+
+    if (!document.querySelector('input[name="payment"]:checked')) {
+        pagamentoWarn.classList.remove('hidden');
+        pagamentoWarn.classList.add('border-red-500');
         return;
     }
 
@@ -242,8 +305,8 @@ const isOpen = checkRestaurantOpen();
 if(isOpen){
     spanItem.classList.remove("bg-red-500");
     spanItem.classList.add("bg-green-600");
+    horarioFuncionamento.innerHTML = 'ABERTO - 18:30 - 23:00'
 } else {
     spanItem.classList.remove("bg-green-600");
     spanItem.classList.add("bg-red-500");
 }
-
