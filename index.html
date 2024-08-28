@@ -44,15 +44,38 @@
             <span class="text-white font-medium">Praça Manoel Zacarias, Cumbe-SE</span>
 
             <div class="bg-green-600 px-4 py-1 rounded-lg mt-5" id="date-span">
-                <span class="text-white font-medium">Seg a Dom - 18:30 às 23:00</span>
+                <span class="text-white font-medium" id="horario-funcionamento">FECHADO - 18:30 às 23:00</span>
             </div>
         </div>
     </header>
     <!--FIM HEADER-->
 
-    <h2 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6">
+    <aside id="menu-navegavel">
+        <a href="#tradicionais" 
+        onmouseover="hoverItem1()"
+        onmouseout="outItem1()"
+        id="item-1">Hambúrgueres</a>
+
+        <a href="#outros-lanches" 
+        onmouseover="hoverItem2()"
+        onmouseout="outItem2()"
+        id="item-2">Outros lanches</a>
+
+        <a href="#bebidas" 
+        onmouseover="hoverItem3()"
+        onmouseout="outItem3()"
+        id="item-3">Bebidas</a>
+    </aside>
+
+    <h1 class="text-2xl md:text-3xl font-bold text-center mt-9 mb-6" id="tradicionais">
         Conheça nosso menu
-    </h2>
+    </h1>
+
+    <div class="mx-auto max-w-7xl px-2 my-2">
+        <h2 class="font-bold text-3xl">
+            Hambúrgueres
+        </h2>
+    </div>
 
     <!--INÍCIO MENU -->     
     <div id="menu">
@@ -332,7 +355,7 @@
                     <p class="text-sm">Pão, ovo, queijo, presunto, salada, cheeder, batata palha e barbecue</p>
 
                     <div class="flex items-center gap-2 justify-between mt-3">
-                        <p class="font-bold text-lg">R$ 6.00</p>
+                        <p class="font-bold text-lg" id="outros-lanches">R$ 6.00</p>
                         <button 
                         class="bg-gray-900 px-5 rounded add-to-cart-btn"
                         data-name="Americano"
@@ -392,7 +415,7 @@
                     <p class="font-bold">Cachorro Quente</p>
 
                     <div class="flex items-center gap-2 justify-between mt-3">
-                        <p class="font-bold text-lg">R$ 5.00</p>
+                        <p class="font-bold text-lg" id="bebidas">R$ 5.00</p>
                         <button 
                         class="bg-gray-900 px-5 rounded add-to-cart-btn"
                         data-name="Cachorro Quente"
@@ -530,120 +553,125 @@
     class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden overflow-auto"
     id="cart-modal"
     >
-    <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] max-h-[90vh] overflow-y-auto">
-        <h2 class="text-center font-bold text-2xl mb-4 pt-4">Meu carrinho</h2>
+        <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] max-h-[90vh] overflow-y-auto">
+            <h2 class="text-center font-bold text-2xl mb-4 pt-4">Meu carrinho</h2>
 
-        <div id="cart-items" class="flex justify-between mb-2 flex-col"></div>
+            <div id="cart-items" class="flex justify-between mb-2 flex-col"></div>
 
-        <p class="font-bold mb-6">Total: <span id="cart-total">0.00</span></p>
+            <p class="font-bold mb-6">Total: <span id="cart-total">0.00</span></p>
 
-        <div>
-            <p class="font-bold mt-3">Digite o seu nome:</p>
-            <input
-                type="text"
-                placeholder="Digite o seu nome completo"
-                id="nameuser"
-                class="w-full border-2 p-1 rounded my-1"
-                required
-            >
-        </div>
-        <p class="text-red-500 hidden" id="nameuser-warn">Digite o seu nome completo!</p>
-
-        <!-- Opções de Retirada ou Delivery -->
-        <p class="font-bold mt-3">O pedido é para:</p>
-        <div id="delivery-selection" class="block gap-4 mb-4">
-
-            <label class="flex items-center gap-2">
-                <input
-                    type="radio"
-                    name="delivery-method"
-                    value="delivery"
-                    id="delivery"
-                    class="form-radio text-right"> Delivery
-            </label>
-
-            <label class="flex items-center gap-2">
-                <input
-                    type="radio"
-                    name="delivery-method"
-                    value="pickup"
-                    id="pickup"
-                    class="form-radio text-right"> Consumir/Retirar no local
-            </label>
-        </div>
-
-        <!-- Campos de Delivery -->
-        <div id="delivery-fields" class="hidden">
-            <p class="font-bold mt-3">Endereço de entrega:</p>
-            <input
-                type="text"
-                placeholder="Digite o seu endereço..."
-                id="address"
-                class="w-full border-2 p-1 rounded my-1"
-            >
-            <p class="text-red-500 hidden" id="address-warn">Digite o seu endereço completo!</p>
-
-            <p class="font-bold mt-3">Ponto de referência:</p>
-            <input
-                type="text"
-                placeholder="Digite o ponto de referência do seu local"
-                id="pontoref"
-                class="w-full border-2 p-1 rounded my-1"
-            >
-        </div>
-
-        <p class="font-bold mt-3">Observações?</p>
-        <input
-            type="text"
-            placeholder="Sobre o lanche ou outra coisa..."
-            id="observacoes"
-            class="w-full border-2 p-1 rounded my-1"
-        >
-
-        <p class="font-bold mt-3 mb-4">Forma de pagamento:</p>
-        <div id="payment-method" class="flex flex-col gap-4 mb-4">
-            <label class="flex items-center gap-2">
-                <input
-                    type="radio"
-                    name="payment"
-                    value="cash"
-                    id="payment-cash"
-                    class="form-radio text-right"> Dinheiro
-            </label>
-
-            <div id="change-selection" class="hidden">
-                <p class="font-bold mt-3">Precisa de troco?</p>
+            <div>
+                <p class="font-bold mt-3">Digite o seu nome:</p>
                 <input
                     type="text"
-                    placeholder="Se sim, quanto de troco?"
-                    id="cash-amount"
+                    placeholder="Digite o seu nome completo"
+                    id="nameuser"
                     class="w-full border-2 p-1 rounded my-1"
                     required
                 >
-                <p class="text-red-500 hidden" id="troco-warn">Digite se precisará de troco e para quanto, caso precise</p>
+            </div>
+            <p class="text-red-500 hidden" id="nameuser-warn">Digite o seu nome completo!</p>
+
+            <!-- Opções de Retirada ou Delivery -->
+            <p class="font-bold mt-3">O pedido é para:</p>
+            <div id="delivery-selection" class="block gap-4 mb-4">
+
+                <label class="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="delivery-method"
+                        value="delivery"
+                        id="delivery"
+                        class="form-radio text-right"> Delivery
+                </label>
+
+                <label class="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="delivery-method"
+                        value="pickup"
+                        id="pickup"
+                        class="form-radio text-right"> Consumir/Retirar no local
+                </label>
+
+                <p class="text-red-500 hidden" id="retirada-warn">Informe o método de retirada!</p>
             </div>
 
-            <label class="flex items-center gap-2">
+            <!-- Campos de Delivery -->
+            <div id="delivery-fields" class="hidden">
+                <p class="font-bold mt-3">Endereço de entrega:</p>
                 <input
-                    type="radio"
-                    name="payment"
-                    value="pix"
-                    id="payment-pix"
-                    class="form-radio text-right"> Pix
-            </label>
-        </div>
+                    type="text"
+                    placeholder="Digite o seu endereço..."
+                    id="address"
+                    class="w-full border-2 p-1 rounded my-1"
+                >
+                <p class="text-red-500 hidden" id="address-warn">Digite o seu endereço completo!</p>
 
-        <div id="pix-section" class="hidden">
-            <p class="font-bold mt-3">Chave pix: 79996041990</p>
-            <p class="font-bold mt-3">Mande o comprovante de pagamento no WhatsApp</p>
-            <p class="text-red-500 hidden" id="pix-warn">Por favor, envie o comprovante de pagamento!</p>
-        </div>
+                <p class="font-bold mt-3">Ponto de referência:</p>
+                <input
+                    type="text"
+                    placeholder="Digite o ponto de referência do seu local"
+                    id="pontoref"
+                    class="w-full border-2 p-1 rounded my-1"
+                >
+            </div>
 
-        <div class="flex items-center justify-between mt-5 w-full">
-            <button id="close-modal-btn" class="bg-gray-300 px-4 py-2 rounded">Fechar</button>
-            <button id="checkout-btn" class="bg-green-500 text-white px-4 py-2 rounded" type="submit">Finalizar pedido</button>
+            <p class="font-bold mt-3">Observações?</p>
+            <input
+                type="text"
+                placeholder="Sobre o lanche ou outra coisa..."
+                id="observacoes"
+                class="w-full border-2 p-1 rounded my-1"
+            >
+
+            <p class="font-bold mt-3 mb-4">Forma de pagamento:</p>
+            <div id="payment-method" class="flex flex-col gap-4 mb-4">
+                <label class="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="cash"
+                        id="payment-cash"
+                        class="form-radio text-right"> Dinheiro
+                </label>
+
+                <div id="change-selection" class="hidden">
+                    <p class="font-bold mt-3">Precisa de troco?</p>
+                    <input
+                        type="text"
+                        placeholder="Se sim, quanto de troco?"
+                        id="cash-amount"
+                        class="w-full border-2 p-1 rounded my-1"
+                        required
+                    >
+                    <p class="text-red-500 hidden" id="troco-warn">Digite se precisará de troco e para quanto, caso precise</p>
+                </div>
+
+                <label class="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="pix"
+                        id="payment-pix"
+                        class="form-radio text-right"> Pix
+                </label>
+
+                <p class="text-red-500 hidden" id="pagamento-warn">Escolha uma forma de pagamento!</p>
+
+            </div>
+
+            <div id="pix-section" class="hidden">
+                <p class="font-bold mt-3">Chave pix: 79996041990</p>
+                <p class="font-bold mt-3">Mande o comprovante de pagamento no WhatsApp</p>
+                <p class="text-red-500 hidden" id="pix-warn">Por favor, envie o comprovante de pagamento!</p>
+            </div>
+
+            <div class="flex items-center justify-between mt-5 w-full">
+                <button id="close-modal-btn" class="bg-gray-300 px-4 py-2 rounded">Fechar</button>
+                <button id="checkout-btn" class="bg-green-500 text-white px-4 py-2 rounded" type="submit">Finalizar pedido</button>
+            </div>
         </div>
-    </div>
     </div>
 
     <!-- SCRIPT DE CONTROLE DE PAGAMENTO E DELIVERY -->
