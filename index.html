@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,17 +57,26 @@
         <a href="#tradicionais" 
         onmouseover="hoverItem1()"
         onmouseout="outItem1()"
-        id="item-1">Hambúrgueres</a>
+        id="item-1"
+        style="padding: 12px;
+        color: white;
+        font-weight: bold;">Hambúrgueres</a>
 
         <a href="#outros-lanches" 
         onmouseover="hoverItem2()"
         onmouseout="outItem2()"
-        id="item-2">Outros lanches</a>
+        id="item-2"
+        style="padding: 12px;
+        color: white;
+        font-weight: bold;">Outros lanches</a>
 
         <a href="#bebidas" 
         onmouseover="hoverItem3()"
         onmouseout="outItem3()"
-        id="item-3">Bebidas</a>
+        id="item-3"
+        style="padding: 12px;
+        color: white;
+        font-weight: bold;">Bebidas</a>
         
     </aside>
 
@@ -555,7 +564,7 @@
     <!-- MODAL CART -->
     <div
     class="bg-black/60 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden overflow-auto"
-    id="cart-modal"
+    id="cart-modal" style="z-index: 1000;"
     >
         <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] max-h-[90vh] overflow-y-auto">
             <h2 class="text-center font-bold text-2xl mb-4 pt-4">Meu carrinho</h2>
