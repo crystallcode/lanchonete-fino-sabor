@@ -265,16 +265,17 @@ checkoutBtn.addEventListener("click", function(){
     // Enviar o pedido para o WhatsApp
     const cartItems = cart.map((item) => {
         return (
-            `Pedido: ${item.name}\nQuantidade: (${item.quantity})\nPreço: R$${item.price}\n`
+            `${item.name}, Quantidade: (${item.quantity})\nPreço: R$${item.price.toFixed(2)}\n`
         );
     }).join("\n");
 
-    const deliveryMethod = document.getElementById('delivery').checked ? "Delivery" : "Retirar no local";
+    const totalCompra = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+    const deliveryMethod = document.getElementById('delivery').checked ? "Delivery" : "Consumir/Retirar no local";
     const paymentInfo = paymentMethod === 'cash' ? `Dinheiro, precisa de troco: ${cashamountInput.value}` : "Pix";
 
-
-    const message = encodeURIComponent(`
-${cartItems}
+    const msgInicial = 'Olá, gostaria de fazer um pedido!\n\nPedido:\n\n'
+    const message = encodeURIComponent(`${msgInicial} ${cartItems} 
 
 Nome do cliente: ${nameuserInput.value}
 
@@ -282,6 +283,8 @@ Método de retirada: ${deliveryMethod}
 ${deliveryMethod === "Delivery" ? `Endereço: ${addressInput.value}\nPonto de referência: ${pontorefInput.value}\n` : ''}
 
 Forma de pagamento: ${paymentInfo}
+
+Total do pedido: R$${totalCompra.toFixed(2)}
 
 Observações do cliente, caso tenha: '${observacoesInput.value}'
     `);
