@@ -308,7 +308,7 @@ const isOpen = checkRestaurantOpen();
 if(isOpen){
     spanItem.classList.remove("bg-red-500");
     spanItem.classList.add("bg-green-600");
-    horarioFuncionamento.innerHTML = 'ABERTO - 18:30 - 23:00'
+    horarioFuncionamento.innerHTML = 'ABERTO - 18:30 - 00:00'
 } else {
     spanItem.classList.remove("bg-green-600");
     spanItem.classList.add("bg-red-500");
