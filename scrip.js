@@ -302,7 +302,7 @@ function checkRestaurantOpen() {
     const data = new Date();
     const hora = data.getHours();
     const minutos = data.getMinutes();
-    return (hora > 18 || (hora === 18 && minutos >= 00)) && (hora < 23 || (hora === 23 && minutos === 0));
+    return (hora > 18 || (hora === 18 && minutos >= 30)) && (hora < 23 || (hora === 23 && minutos === 0));
 }
 
 const spanItem = document.getElementById("date-span");
