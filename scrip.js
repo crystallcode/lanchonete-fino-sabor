@@ -57,12 +57,10 @@ function outItem3() {
 let cart = [];
 let paymentMethod = '';
 
-// Abrir o modal do carrinho
 cartBtn.addEventListener("click", function() {
     cartModal.style.display = "flex";
 });
 
-// Fechar modal quando clicar fora
 cartModal.addEventListener("click", function(event){
     if(event.target === cartModal){
         cartModal.style.display = "none";
@@ -82,11 +80,9 @@ menu.addEventListener("click", function(event){
     }
 });
 
-// Função para adicionar no carrinho
 function addToCart(name, price){
     const existingItem = cart.find(item => item.name === name);
     if(existingItem){
-        // Se o item já existe, aumenta apenas a quantidade +1
         existingItem.quantity += 1;
     } else {
         cart.push({
@@ -98,7 +94,6 @@ function addToCart(name, price){
     updateCartModal();
 }
 
-// Atualiza o carrinho
 function updateCartModal(){
     cartItemsContainer.innerHTML = "";
     let total = 0;
@@ -127,7 +122,6 @@ function updateCartModal(){
     cartCounter.innerHTML = cart.length;
 }
 
-// Função para remover itens do carrinho
 cartItemsContainer.addEventListener("click", function(event) {
     if(event.target.classList.contains("remove-from-cart-btn")) {
         const name = event.target.getAttribute("data-name");
@@ -172,14 +166,12 @@ cashamountInput.addEventListener("input", function(event){
     }
 });
 
-//Retirada warn
 deliveryMethodRadios.forEach(input => {
     input.addEventListener('change', function() {
-        retiradaWarn.classList.add('hidden'); // Remove o aviso quando um método é selecionado
+        retiradaWarn.classList.add('hidden'); 
     });
 });
 
-//Pagamento warn
 paymentMethodRadios.forEach(input => {
     input.addEventListener('change', function() {
         pagamentoWarn.classList.add('hidden'); 
@@ -212,6 +204,18 @@ paymentMethodRadios.forEach(input => {
     });
 });
 
+const valorWarn = document.getElementById('valor-warn');
+cashamountInput.addEventListener("input", function() {
+    const totalCompra = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    const valorDigitado = parseFloat(cashamountInput.value) || 0; 
+
+    if (valorDigitado < totalCompra) {
+        valorWarn.classList.remove("hidden");
+    } else {
+        valorWarn.classList.add("hidden");
+    }
+});
+
 // Finalizar pedidos
 checkoutBtn.addEventListener("click", function(){
     const isOpen = checkRestaurantOpen();
@@ -220,9 +224,9 @@ checkoutBtn.addEventListener("click", function(){
             text: "Ops, o restaurante está fechado no momento",
             duration: 3000,
             close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "right", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
+            gravity: "top", 
+            position: "right",
+            stopOnFocus: true, 
             style: {
                 background: "#ef4444",
             },
@@ -310,7 +314,7 @@ const isOpen = checkRestaurantOpen();
 if(isOpen){
     spanItem.classList.remove("bg-red-500");
     spanItem.classList.add("bg-green-600");
-    horarioFuncionamento.innerHTML = 'ABERTO - 18:30 às 23:00'
+    horarioFuncionamento.innerHTML = 'ABERTO - 18:30 - 23:00'
 } else {
     spanItem.classList.remove("bg-green-600");
     spanItem.classList.add("bg-red-500");
